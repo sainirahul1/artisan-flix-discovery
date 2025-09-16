@@ -1,5 +1,6 @@
 import { Navigation } from "@/components/Navigation";
-import { HeroSection } from "@/components/HeroSection";
+import { HeroSlider } from "@/components/HeroSlider";
+import { CategoryGrid } from "@/components/CategoryGrid";
 import { ProductCarousel } from "@/components/ProductCarousel";
 import { 
   trendingProducts, 
@@ -14,11 +15,14 @@ const Index = () => {
       {/* Navigation */}
       <Navigation />
       
-      {/* Hero Section */}
-      <HeroSection />
+      {/* Hero Slider */}
+      <HeroSlider />
+      
+      {/* Category Grid */}
+      <CategoryGrid />
       
       {/* Product Carousels */}
-      <div className="relative z-10 -mt-32">
+      <div className="space-y-8">
         {/* Trending Now */}
         <ProductCarousel
           title="🔥 Trending Now"
@@ -50,7 +54,7 @@ const Index = () => {
       </div>
       
       {/* Footer Spacer */}
-      <div className="h-20" />
+      <div className="h-32" />
     </div>
   );
 };

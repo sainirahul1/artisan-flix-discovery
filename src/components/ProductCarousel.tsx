@@ -41,62 +41,66 @@ export const ProductCarousel = ({ title, subtitle, products, priority }: Product
   };
 
   return (
-    <div className="relative py-8">
-      {/* Section Header */}
-      <div className="flex items-center justify-between mb-6 px-6">
-        <div>
-          <h2 className="text-2xl md:text-3xl font-bold text-white mb-2 text-netflix">
-            {title}
-          </h2>
-          {subtitle && (
-            <p className="text-muted-foreground text-lg">{subtitle}</p>
-          )}
-        </div>
-        
-        {/* Navigation Buttons */}
-        <div className="hidden md:flex gap-2">
-          <Button
-            variant="glass"
-            size="icon"
-            onClick={() => scroll("left")}
-            className="rounded-full"
-          >
-            <ChevronLeft className="h-5 w-5" />
-          </Button>
-          <Button
-            variant="glass"
-            size="icon"
-            onClick={() => scroll("right")}
-            className="rounded-full"
-          >
-            <ChevronRight className="h-5 w-5" />
-          </Button>
-        </div>
-      </div>
-
-      {/* Products Carousel */}
-      <div
-        ref={scrollRef}
-        className="carousel-row flex gap-4 px-6 pb-4 overflow-x-auto"
-        style={{ scrollSnapType: "x mandatory" }}
-      >
-        {products.map((product, index) => (
-          <div
-            key={product.id}
-            className="flex-shrink-0"
-            style={{ scrollSnapAlign: "start" }}
-          >
-            <ProductCard
-              {...product}
-              key={`${product.id}-${index}`}
-            />
+    <section className="py-12">
+      <div className="max-w-7xl mx-auto">
+        {/* Section Header */}
+        <div className="flex items-center justify-between mb-8 px-6">
+          <div>
+            <h2 className="text-2xl md:text-3xl font-bold text-white mb-2 text-netflix">
+              {title}
+            </h2>
+            {subtitle && (
+              <p className="text-muted-foreground text-lg">{subtitle}</p>
+            )}
           </div>
-        ))}
-      </div>
+          
+          {/* Navigation Buttons */}
+          <div className="hidden md:flex gap-2">
+            <Button
+              variant="glass"
+              size="icon"
+              onClick={() => scroll("left")}
+              className="rounded-full hover:scale-110 transition-transform"
+            >
+              <ChevronLeft className="h-5 w-5" />
+            </Button>
+            <Button
+              variant="glass"
+              size="icon"
+              onClick={() => scroll("right")}
+              className="rounded-full hover:scale-110 transition-transform"
+            >
+              <ChevronRight className="h-5 w-5" />
+            </Button>
+          </div>
+        </div>
 
-      {/* Fade edges for scroll indication */}
-      <div className="absolute left-0 top-0 bottom-0 w-6 bg-gradient-to-r from-background to-transparent pointer-events-none" />
-      <div className="absolute right-0 top-0 bottom-0 w-6 bg-gradient-to-l from-background to-transparent pointer-events-none" />
-    </div>
+        {/* Products Carousel */}
+        <div className="relative">
+          <div
+            ref={scrollRef}
+            className="carousel-row flex gap-6 px-6 pb-6 overflow-x-auto"
+            style={{ scrollSnapType: "x mandatory" }}
+          >
+            {products.map((product, index) => (
+              <div
+                key={product.id}
+                className="flex-shrink-0"
+                style={{ scrollSnapAlign: "start" }}
+              >
+                <ProductCard
+                  {...product}
+                  key={`${product.id}-${index}`}
+                />
+              </div>
+            ))}
+          </div>
+
+          {/* Fade edges for scroll indication */}
+          <div className="absolute left-0 top-0 bottom-6 w-6 bg-gradient-to-r from-background to-transparent pointer-events-none" />
+          <div className="absolute right-0 top-0 bottom-6 w-6 bg-gradient-to-l from-background to-transparent pointer-events-none" />
+        </div>
+      </div>
+    </section>
   );
 };

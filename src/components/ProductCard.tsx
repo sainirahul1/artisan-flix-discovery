@@ -34,7 +34,7 @@ export const ProductCard = ({
 
   return (
     <div
-      className="product-card relative w-72 h-96 rounded-xl overflow-hidden cursor-pointer group"
+      className="product-card relative w-80 h-[480px] rounded-2xl overflow-hidden cursor-pointer group bg-card"
       onMouseEnter={() => setIsHovered(true)}
       onMouseLeave={() => setIsHovered(false)}
     >
@@ -47,15 +47,15 @@ export const ProductCard = ({
         />
         
         {/* Gradient Overlay */}
-        <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/20 to-transparent" />
+        <div className="absolute inset-0 bg-gradient-to-t from-black/90 via-black/30 to-transparent" />
         
         {/* Badges */}
-        <div className="absolute top-4 left-4 flex gap-2">
+        <div className="absolute top-6 left-6 flex gap-2">
           {isNew && (
-            <Badge className="bg-accent text-black font-bold">NEW</Badge>
+            <Badge className="bg-accent text-black font-bold shadow-lg">NEW</Badge>
           )}
           {isTrending && (
-            <Badge className="bg-primary text-white font-bold animate-glow-pulse">
+            <Badge className="bg-primary text-white font-bold animate-glow-pulse shadow-lg">
               TRENDING
             </Badge>
           )}
@@ -65,7 +65,7 @@ export const ProductCard = ({
         <Button
           variant="glass"
           size="icon"
-          className="absolute top-4 right-4 opacity-80 hover:opacity-100"
+          className="absolute top-6 right-6 opacity-80 hover:opacity-100 w-10 h-10"
           onClick={(e) => {
             e.stopPropagation();
             setIsWishlisted(!isWishlisted);
@@ -80,7 +80,7 @@ export const ProductCard = ({
 
         {/* Product Info Overlay */}
         <div
-          className={`product-overlay absolute inset-0 flex flex-col justify-end p-6 transition-all duration-300 ${
+          className={`product-overlay absolute inset-0 flex flex-col justify-end p-8 transition-all duration-300 ${
             isHovered ? "opacity-100" : "opacity-0 md:opacity-100"
           }`}
         >
