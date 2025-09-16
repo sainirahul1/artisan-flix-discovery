@@ -2,6 +2,7 @@ import { useState, useEffect } from "react";
 import { ChevronLeft, ChevronRight, Play, Star, Heart } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
+import { useNavigate } from "react-router-dom";
 import heroImage from "@/assets/hero-artisan.jpg";
 import potteryImg from "@/assets/pottery-collection.jpg";
 import textilesImg from "@/assets/textiles-collection.jpg";
@@ -15,6 +16,7 @@ const heroSlides = [
     description: "Immerse yourself in authentic craftsmanship from local artisans",
     image: heroImage,
     cta: "Explore Collection",
+    ctaLink: "/",
     secondaryCta: "Watch Stories",
     featured: "2,500+ Local Artisans",
   },
@@ -25,6 +27,7 @@ const heroSlides = [
     description: "Handcrafted ceramics that tell stories of generations",
     image: potteryImg,
     cta: "Shop Pottery",
+    ctaLink: "/category/pottery",
     secondaryCta: "Meet Artisans",
     featured: "500+ Unique Pieces",
   },
@@ -35,6 +38,7 @@ const heroSlides = [
     description: "Premium handwoven fabrics with intricate patterns",
     image: textilesImg,
     cta: "View Textiles",
+    ctaLink: "/category/textiles",
     secondaryCta: "Learn Techniques",
     featured: "Heritage Weaving",
   },
@@ -45,6 +49,7 @@ const heroSlides = [
     description: "Masterfully carved pieces that blend tradition with modern design",
     image: woodcraftImg,
     cta: "Discover Wood Art",
+    ctaLink: "/category/woodcraft",
     secondaryCta: "Craftsman Stories",
     featured: "Sustainable Materials",
   },
@@ -53,6 +58,7 @@ const heroSlides = [
 export const HeroSlider = () => {
   const [currentSlide, setCurrentSlide] = useState(0);
   const [isAutoPlaying, setIsAutoPlaying] = useState(true);
+  const navigate = useNavigate();
 
   // Auto-play functionality
   useEffect(() => {
@@ -135,7 +141,12 @@ export const HeroSlider = () => {
 
             {/* Action Buttons */}
             <div className="flex flex-col sm:flex-row gap-4 mb-8 animate-slide-up" style={{ animationDelay: "0.4s" }}>
-              <Button variant="hero" size="xl" className="text-lg">
+              <Button 
+                variant="hero" 
+                size="xl" 
+                className="text-lg"
+                onClick={() => navigate(slide.ctaLink || "/")}
+              >
                 {slide.cta}
               </Button>
               <Button variant="glass" size="xl" className="text-lg">

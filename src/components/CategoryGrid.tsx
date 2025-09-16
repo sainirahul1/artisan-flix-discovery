@@ -1,5 +1,6 @@
 import { ArrowRight, Sparkles } from "lucide-react";
 import { Button } from "@/components/ui/button";
+import { useNavigate } from "react-router-dom";
 import potteryImg from "@/assets/pottery-collection.jpg";
 import textilesImg from "@/assets/textiles-collection.jpg";
 import woodcraftImg from "@/assets/woodcraft-collection.jpg";
@@ -13,6 +14,7 @@ const categories = [
     image: potteryImg,
     count: "1,200+ items",
     trend: "+15% this week",
+    link: "/category/pottery",
   },
   {
     id: 2,
@@ -21,6 +23,7 @@ const categories = [
     image: textilesImg,
     count: "800+ items",
     trend: "+8% this week",
+    link: "/category/textiles",
   },
   {
     id: 3,
@@ -29,6 +32,7 @@ const categories = [
     image: woodcraftImg,
     count: "600+ items",
     trend: "+12% this week",
+    link: "/category/woodcraft",
   },
   {
     id: 4,
@@ -37,10 +41,12 @@ const categories = [
     image: jewelryImg,
     count: "900+ items",
     trend: "+20% this week",
+    link: "/category/jewelry",
   },
 ];
 
 export const CategoryGrid = () => {
+  const navigate = useNavigate();
   return (
     <section className="py-16 px-6">
       <div className="max-w-7xl mx-auto">
@@ -65,6 +71,7 @@ export const CategoryGrid = () => {
               key={category.id}
               className="group relative overflow-hidden rounded-2xl aspect-[4/5] cursor-pointer hover-scale"
               style={{ animationDelay: `${index * 0.1}s` }}
+              onClick={() => navigate(category.link)}
             >
               {/* Background Image */}
               <img

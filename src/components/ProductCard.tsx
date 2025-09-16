@@ -2,6 +2,10 @@ import { useState } from "react";
 import { Heart, ShoppingCart, Star } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
+import { useNavigate } from "react-router-dom";
+import { useCart } from "@/contexts/CartContext";
+import { useWishlist } from "@/contexts/WishlistContext";
+import { toast } from "@/hooks/use-toast";
 
 interface ProductCardProps {
   id: string;
@@ -18,6 +22,7 @@ interface ProductCardProps {
 }
 
 export const ProductCard = ({
+  id,
   name,
   price,
   originalPrice,
@@ -29,14 +34,19 @@ export const ProductCard = ({
   isNew,
   isTrending,
 }: ProductCardProps) => {
-  const [isWishlisted, setIsWishlisted] = useState(false);
+  const navigate = useNavigate();
+  const { addItem } = useCart();
+  const { addItem: addToWishlist, removeItem: removeFromWishlist, isInWishlist } = useWishlist();
   const [isHovered, setIsHovered] = useState(false);
+  
+  const wishlisted = isInWishlist(id);
 
   return (
     <div
       className="product-card relative w-80 h-[480px] rounded-2xl overflow-hidden cursor-pointer group bg-card"
       onMouseEnter={() => setIsHovered(true)}
       onMouseLeave={() => setIsHovered(false)}
+      onClick={() => navigate(`/product/${id}`)}
     >
       {/* Product Image */}
       <div className="relative w-full h-full">
@@ -68,12 +78,20 @@ export const ProductCard = ({
           className="absolute top-6 right-6 opacity-80 hover:opacity-100 w-10 h-10"
           onClick={(e) => {
             e.stopPropagation();
-            setIsWishlisted(!isWishlisted);
+            if (wishlisted) {
+              removeFromWishlist(id);
+              toast({ title: "Removed from wishlist" });
+            } else {
+              addToWishlist({
+                id, name, price, originalPrice, image, artisan, rating, reviews, category, isNew, isTrending
+              });
+              toast({ title: "Added to wishlist" });
+            }
           }}
         >
           <Heart
             className={`h-4 w-4 transition-colors ${
-              isWishlisted ? "fill-primary text-primary" : "text-white"
+              wishlisted ? "fill-primary text-primary" : "text-white"
             }`}
           />
         </Button>
@@ -115,19 +133,34 @@ export const ProductCard = ({
           </div>
 
           {/* Action Buttons */}
-          <div
-            className={`flex gap-2 transition-all duration-300 ${
-              isHovered ? "translate-y-0 opacity-100" : "translate-y-4 opacity-0 md:translate-y-0 md:opacity-100"
-            }`}
-          >
-            <Button variant="hero" className="flex-1">
-              <ShoppingCart className="h-4 w-4" />
-              Add to Cart
-            </Button>
-            <Button variant="glass" size="lg">
-              View Details
-            </Button>
-          </div>
+            <div
+              className={`flex gap-2 transition-all duration-300 ${
+                isHovered ? "translate-y-0 opacity-100" : "translate-y-4 opacity-0 md:translate-y-0 md:opacity-100"
+              }`}
+            >
+              <Button 
+                variant="hero" 
+                className="flex-1"
+                onClick={(e) => {
+                  e.stopPropagation();
+                  addItem({ id, name, price, image, artisan });
+                  toast({ title: "Added to cart", description: `${name} has been added to your cart.` });
+                }}
+              >
+                <ShoppingCart className="h-4 w-4" />
+                Add to Cart
+              </Button>
+              <Button 
+                variant="glass" 
+                size="lg"
+                onClick={(e) => {
+                  e.stopPropagation();
+                  navigate(`/product/${id}`);
+                }}
+              >
+                View Details
+              </Button>
+            </div>
         </div>
       </div>
     </div>
