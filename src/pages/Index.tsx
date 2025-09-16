@@ -1,12 +1,56 @@
-// Update this page (the content is just a fallback if you fail to update the page)
+import { Navigation } from "@/components/Navigation";
+import { HeroSection } from "@/components/HeroSection";
+import { ProductCarousel } from "@/components/ProductCarousel";
+import { 
+  trendingProducts, 
+  nearYouProducts, 
+  ecoFriendlyProducts, 
+  becauseYouLikedProducts 
+} from "@/data/mockData";
 
 const Index = () => {
   return (
-    <div className="flex min-h-screen items-center justify-center bg-background">
-      <div className="text-center">
-        <h1 className="mb-4 text-4xl font-bold">Welcome to Your Blank App</h1>
-        <p className="text-xl text-muted-foreground">Start building your amazing project here!</p>
+    <div className="min-h-screen bg-background">
+      {/* Navigation */}
+      <Navigation />
+      
+      {/* Hero Section */}
+      <HeroSection />
+      
+      {/* Product Carousels */}
+      <div className="relative z-10 -mt-32">
+        {/* Trending Now */}
+        <ProductCarousel
+          title="🔥 Trending Now"
+          subtitle="Most loved by our community"
+          products={trendingProducts}
+          priority
+        />
+        
+        {/* Near You */}
+        <ProductCarousel
+          title="📍 Near You in Hyderabad"
+          subtitle="Local artisans creating magic"
+          products={nearYouProducts}
+        />
+        
+        {/* Because You Liked */}
+        <ProductCarousel
+          title="🎯 Because You Liked Pottery"
+          subtitle="More beautiful ceramics just for you"
+          products={becauseYouLikedProducts}
+        />
+        
+        {/* Eco-Friendly */}
+        <ProductCarousel
+          title="🌱 Eco-Friendly Picks"
+          subtitle="Sustainable craftsmanship"
+          products={ecoFriendlyProducts}
+        />
       </div>
+      
+      {/* Footer Spacer */}
+      <div className="h-20" />
     </div>
   );
 };
