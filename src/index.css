@@ -39,9 +39,9 @@
     --muted: 0 0% 20%;
     --muted-foreground: 0 0% 70%;
     
-    --accent: 160 100% 50%;
-    --accent-foreground: 0 0% 98%;
-    --accent-glow: 160 100% 50% / 0.3;
+    --accent: 45 100% 65%;
+    --accent-foreground: 0 0% 10%;
+    --accent-glow: 45 100% 65% / 0.3;
     
     /* Status colors */
     --destructive: 0 84% 60%;
@@ -95,7 +95,7 @@
     --secondary-foreground: 0 0% 90%;
     --muted: 0 0% 20%;
     --muted-foreground: 0 0% 70%;
-    --accent: 160 100% 50%;
+    --accent: 45 100% 65%;
     --accent-foreground: 0 0% 10%;
     --border: 0 0% 20%;
     --input: 0 0% 15%;
