@@ -38,11 +38,11 @@ export const Navigation = () => {
         <div className="flex items-center justify-between h-16">
           {/* Logo */}
           <Link to="/" className="flex items-center gap-3">
-            <div className="w-8 h-8 bg-gradient-red rounded-lg flex items-center justify-center">
-              <span className="text-white font-bold text-lg">A</span>
+            <div className="w-8 h-8 bg-gradient-to-br from-primary to-accent rounded-lg flex items-center justify-center">
+              <span className="text-white font-bold text-lg">C</span>
             </div>
             <span className="text-white text-xl font-bold text-netflix">
-              ArtisanFlix
+              CraftVerse
             </span>
           </Link>
 
