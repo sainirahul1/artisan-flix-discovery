@@ -48,11 +48,14 @@ export const SignInForm = ({ userType = 'customer', onSuccess }: SignInFormProps
   return (
     <Card className="w-full max-w-md mx-auto">
       <CardHeader className="space-y-1">
-        <CardTitle className="text-2xl font-bold text-center">
-          Sign In {userType === 'artisan' ? 'as Artisan' : 'as Customer'}
+        <CardTitle className="text-3xl font-bold text-center text-white">
+          {userType === 'artisan' ? '🎨 Artisan Portal' : '🛍️ Customer Login'}
         </CardTitle>
-        <p className="text-center text-muted-foreground">
-          Welcome back to CraftVerse
+        <p className="text-center text-gray-400">
+          {userType === 'artisan' 
+            ? 'Access your workshop dashboard and manage your crafts' 
+            : 'Welcome back to your handcrafted marketplace'
+          }
         </p>
       </CardHeader>
       <CardContent>

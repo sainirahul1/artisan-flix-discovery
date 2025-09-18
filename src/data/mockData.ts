@@ -20,7 +20,7 @@ import product18 from "@/assets/product-18.jpg";
 export const trendingProducts = [
   {
     id: "1",
-    name: "Handcrafted Ceramic Bowl Set",
+    name: "Exquisite Artisan Ceramic Bowl Collection",
     price: 2499,
     originalPrice: 3499,
     image: product1,

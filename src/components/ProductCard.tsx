@@ -135,25 +135,31 @@ export const ProductCard = ({
 
           {/* Action Buttons */}
             <div
-              className={`flex gap-2 transition-all duration-300 ${
+              className={`flex gap-3 transition-all duration-300 ${
                 isHovered ? "translate-y-0 opacity-100" : "translate-y-4 opacity-0 md:translate-y-0 md:opacity-100"
               }`}
             >
               <Button 
                 variant="hero" 
-                className="flex-1"
+                size="xl"
+                className="flex-1 h-12 text-base font-bold shadow-glow-red"
                 onClick={(e) => {
                   e.stopPropagation();
                   addItem({ id, name, price, image, artisan });
-                  toast({ title: "Added to cart", description: `${name} has been added to your cart.` });
+                  toast({ 
+                    title: "✨ Added to cart", 
+                    description: `${name} has been added to your cart.`,
+                    variant: "success" 
+                  });
                 }}
               >
-                <ShoppingCart className="h-4 w-4" />
+                <ShoppingCart className="h-5 w-5" />
                 Add to Cart
               </Button>
               <Button 
                 variant="glass" 
-                size="lg"
+                size="xl"
+                className="px-6 h-12 font-semibold"
                 onClick={(e) => {
                   e.stopPropagation();
                   navigate(`/product/${id}`);

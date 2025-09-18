@@ -87,11 +87,11 @@ export const SignUpForm = ({ defaultUserType = 'customer', onSuccess }: SignUpFo
   return (
     <Card className="w-full max-w-md mx-auto">
       <CardHeader className="space-y-1">
-        <CardTitle className="text-2xl font-bold text-center">
-          Join CraftVerse
+        <CardTitle className="text-3xl font-bold text-center text-white">
+          ✨ Join CraftVerse Community
         </CardTitle>
-        <p className="text-center text-muted-foreground">
-          Create your account to get started
+        <p className="text-center text-gray-400">
+          Start your journey in the world of handcrafted treasures
         </p>
       </CardHeader>
       <CardContent>

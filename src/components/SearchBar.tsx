@@ -16,8 +16,11 @@ export const SearchBar = ({ onClose, autoFocus = false }: SearchBarProps) => {
   const handleSearch = (e: React.FormEvent) => {
     e.preventDefault();
     if (query.trim()) {
-      navigate(`/search?q=${encodeURIComponent(query.trim())}`);
+      const searchQuery = encodeURIComponent(query.trim());
+      navigate(`/search?q=${searchQuery}`);
       onClose?.();
+      // Force page reload to ensure search works
+      window.location.href = `/search?q=${searchQuery}`;
     }
   };
 

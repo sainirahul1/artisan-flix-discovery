@@ -69,6 +69,9 @@
     
     /* Shadows */
     --shadow-glow: 0 0 40px hsl(var(--primary-glow));
+    --shadow-glow-red: 0 0 30px hsl(var(--primary) / 0.6);
+    --shadow-glow-gold: 0 0 40px hsl(var(--accent) / 0.8);
+    --shadow-glow-green: 0 0 30px hsl(142 76% 36% / 0.6);
     --shadow-card: 0 10px 30px -10px hsl(0 0% 0% / 0.5);
     --shadow-elevated: 0 20px 60px -20px hsl(0 0% 0% / 0.7);
     

@@ -14,12 +14,15 @@ export const Navigation = () => {
   const { items: wishlistItems } = useWishlist();
   const navigate = useNavigate();
 
+  const cartItemCount = state.totalItems;
+  const wishlistCount = wishlistItems.length;
+
   const navItems = [
     { label: "Home", href: "/" },
-    { label: "Pottery", href: "/category/pottery" },
-    { label: "Textiles", href: "/category/textiles" },
-    { label: "Jewelry", href: "/category/jewelry" },
-    { label: "Woodcraft", href: "/category/woodcraft" },
+    { label: "Exquisite Pottery", href: "/category/pottery" },
+    { label: "Premium Textiles", href: "/category/textiles" },
+    { label: "Luxury Jewelry", href: "/category/jewelry" },
+    { label: "Artisan Woodcraft", href: "/category/woodcraft" },
   ];
 
   if (isSearchOpen) {
@@ -94,9 +97,9 @@ export const Navigation = () => {
               onClick={() => navigate("/cart")}
             >
               <ShoppingCart className="h-4 w-4" />
-              {state.totalItems > 0 && (
+              {cartItemCount > 0 && (
                 <span className="cart-badge">
-                  {state.totalItems}
+                  {cartItemCount}
                 </span>
               )}
             </Button>
