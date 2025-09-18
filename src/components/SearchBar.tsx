@@ -33,7 +33,7 @@ export const SearchBar = ({ onClose, autoFocus = false }: SearchBarProps) => {
   return (
     <div className="w-full max-w-2xl mx-auto">
       <form onSubmit={handleSearch} className="relative">
-        <div className="glass rounded-2xl p-2 border border-glass-border">
+        <div className="search-enhanced rounded-2xl p-2">
           <div className="flex items-center gap-4">
             <Search className="h-5 w-5 text-muted-foreground ml-4" />
             <Input

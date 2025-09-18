@@ -80,9 +80,9 @@ export const Navigation = () => {
             >
               <Heart className="h-4 w-4" />
               {wishlistItems.length > 0 && (
-                <Badge className="absolute -top-2 -right-2 h-5 w-5 p-0 bg-primary text-xs">
+                <span className="cart-badge">
                   {wishlistItems.length}
-                </Badge>
+                </span>
               )}
             </Button>
 
@@ -95,9 +95,9 @@ export const Navigation = () => {
             >
               <ShoppingCart className="h-4 w-4" />
               {state.totalItems > 0 && (
-                <Badge className="absolute -top-2 -right-2 h-5 w-5 p-0 bg-primary text-xs">
+                <span className="cart-badge">
                   {state.totalItems}
-                </Badge>
+                </span>
               )}
             </Button>
 

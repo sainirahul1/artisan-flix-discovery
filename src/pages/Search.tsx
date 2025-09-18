@@ -5,6 +5,8 @@ import { Navigation } from "@/components/Navigation";
 import { Button } from "@/components/ui/button";
 import { ProductCard } from "@/components/ProductCard";
 import { SearchBar } from "@/components/SearchBar";
+import { ProductSkeleton } from "@/components/ProductSkeleton";
+import { EnhancedSearch } from "@/components/EnhancedSearch";
 import { 
   trendingProducts, 
   nearYouProducts, 
@@ -13,11 +15,13 @@ import {
 } from "@/data/mockData";
 
 const SearchResults = () => {
-  const [searchParams] = useSearchParams();
+  const [searchParams, setSearchParams] = useSearchParams();
   const navigate = useNavigate();
   const query = searchParams.get("q") || "";
   const [filteredProducts, setFilteredProducts] = useState<any[]>([]);
   const [sortBy, setSortBy] = useState("relevance");
+  const [isLoading, setIsLoading] = useState(false);
+  const [filters, setFilters] = useState({ category: "all", priceRange: "all" });
 
   const allProducts = [
     ...trendingProducts,
@@ -32,31 +36,45 @@ const SearchResults = () => {
       return;
     }
 
-    // Simple search implementation
-    const results = allProducts.filter((product) =>
-      product.name.toLowerCase().includes(query.toLowerCase()) ||
-      product.artisan.toLowerCase().includes(query.toLowerCase()) ||
-      product.category.toLowerCase().includes(query.toLowerCase())
-    );
+    setIsLoading(true);
+    
+    // Enhanced search implementation
+    setTimeout(() => {
+      let results = allProducts.filter((product) =>
+        product.name.toLowerCase().includes(query.toLowerCase()) ||
+        product.artisan.toLowerCase().includes(query.toLowerCase()) ||
+        product.category.toLowerCase().includes(query.toLowerCase())
+      );
 
-    // Sort results
-    const sortedResults = [...results].sort((a, b) => {
-      switch (sortBy) {
-        case "price-low":
-          return a.price - b.price;
-        case "price-high":
-          return b.price - a.price;
-        case "rating":
-          return b.rating - a.rating;
-        case "newest":
-          return a.isNew ? -1 : 1;
-        default:
-          return 0;
+      // Apply filters
+      if (filters.category !== "all") {
+        results = results.filter(product => 
+          product.category.toLowerCase() === filters.category
+        );
       }
-    });
 
-    setFilteredProducts(sortedResults);
-  }, [query, sortBy]);
+      // Sort results
+      const sortedResults = [...results].sort((a, b) => {
+        switch (sortBy) {
+          case "price-low":
+            return a.price - b.price;
+          case "price-high":
+            return b.price - a.price;
+          case "rating":
+            return b.rating - a.rating;
+          case "newest":
+            return a.isNew ? -1 : 1;
+          case "popular":
+            return b.reviews - a.reviews;
+          default:
+            return 0;
+        }
+      });
+
+      setFilteredProducts(sortedResults);
+      setIsLoading(false);
+    }, 300);
+  }, [query, sortBy, filters]);
 
   if (!query) {
     return (
@@ -115,7 +133,13 @@ const SearchResults = () => {
           </div>
 
           {/* Results */}
-          {filteredProducts.length > 0 ? (
+          {isLoading ? (
+            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
+              {Array.from({ length: 8 }).map((_, i) => (
+                <ProductSkeleton key={i} />
+              ))}
+            </div>
+          ) : filteredProducts.length > 0 ? (
             <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
               {filteredProducts.map((product) => (
                 <ProductCard key={product.id} {...product} />

@@ -1,13 +1,30 @@
 import { useState } from "react";
-import { Minus, Plus, Trash2, ShoppingBag } from "lucide-react";
-import { Navigation } from "@/components/Navigation";
-import { Button } from "@/components/ui/button";
 import { useCart } from "@/contexts/CartContext";
+import { Button } from "@/components/ui/button";
+import { Navigation } from "@/components/Navigation";
+import { PaymentModal } from "@/components/PaymentModal";
+import { Minus, Plus, Trash2, ShoppingBag } from "lucide-react";
 import { useNavigate } from "react-router-dom";
+import { useToast } from "@/hooks/use-toast";
 
 const Cart = () => {
   const { state, updateQuantity, removeItem, clearCart } = useCart();
   const navigate = useNavigate();
+  const { toast } = useToast();
+  const [isPaymentOpen, setIsPaymentOpen] = useState(false);
+
+  const handleCheckout = () => {
+    setIsPaymentOpen(true);
+  };
+
+  const handlePaymentSuccess = () => {
+    clearCart();
+    navigate("/");
+    toast({
+      title: "Order Placed Successfully!",
+      description: "Thank you for your purchase. Your items will be delivered soon.",
+    });
+  };
 
   if (state.items.length === 0) {
     return (
@@ -122,7 +139,12 @@ const Cart = () => {
               </div>
 
               <div className="space-y-3">
-                <Button variant="hero" size="lg" className="w-full">
+                <Button 
+                  variant="hero" 
+                  size="lg" 
+                  className="w-full"
+                  onClick={handleCheckout}
+                >
                   Proceed to Checkout
                 </Button>
                 <Button 
@@ -138,6 +160,13 @@ const Cart = () => {
           </div>
         </div>
       </div>
+      
+      <PaymentModal
+        isOpen={isPaymentOpen}
+        onClose={() => setIsPaymentOpen(false)}
+        total={state.totalPrice}
+        onSuccess={handlePaymentSuccess}
+      />
       
       <div className="h-32" />
     </div>
