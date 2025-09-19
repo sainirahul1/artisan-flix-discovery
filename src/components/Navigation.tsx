@@ -19,10 +19,7 @@ export const Navigation = () => {
 
   const navItems = [
     { label: "Home", href: "/" },
-    { label: "Exquisite Pottery", href: "/category/pottery" },
-    { label: "Premium Textiles", href: "/category/textiles" },
-    { label: "Luxury Jewelry", href: "/category/jewelry" },
-    { label: "Artisan Woodcraft", href: "/category/woodcraft" },
+    { label: "Sell", href: "/sell" },
   ];
 
   if (isSearchOpen) {
@@ -104,8 +101,8 @@ export const Navigation = () => {
               )}
             </Button>
 
-            {/* Profile */}
-            <Button variant="glass" size="icon">
+            {/* Profile / Auth */}
+            <Button variant="glass" size="icon" onClick={() => navigate("/auth/signin")}> 
               <User className="h-4 w-4" />
             </Button>
 

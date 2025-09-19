@@ -13,6 +13,7 @@ import {
   ecoFriendlyProducts, 
   becauseYouLikedProducts 
 } from "@/data/mockData";
+import { useCommunityProducts } from "@/hooks/useCommunityProducts";
 
 const SearchResults = () => {
   const [searchParams, setSearchParams] = useSearchParams();
@@ -23,7 +24,10 @@ const SearchResults = () => {
   const [isLoading, setIsLoading] = useState(false);
   const [filters, setFilters] = useState({ category: "all", priceRange: "all" });
 
+  const { products: communityProducts } = useCommunityProducts();
+
   const allProducts = [
+    ...communityProducts,
     ...trendingProducts,
     ...nearYouProducts,
     ...ecoFriendlyProducts,

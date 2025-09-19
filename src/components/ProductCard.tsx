@@ -157,9 +157,9 @@ export const ProductCard = ({
                 Add to Cart
               </Button>
               <Button 
-                variant="glass" 
+                variant="cinematic" 
                 size="xl"
-                className="px-6 h-12 font-semibold"
+                className="flex-1 h-12 font-semibold"
                 onClick={(e) => {
                   e.stopPropagation();
                   navigate(`/product/${id}`);

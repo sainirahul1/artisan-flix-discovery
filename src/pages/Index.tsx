@@ -8,8 +8,10 @@ import {
   ecoFriendlyProducts, 
   becauseYouLikedProducts 
 } from "@/data/mockData";
+import { useCommunityProducts } from "@/hooks/useCommunityProducts";
 
 const Index = () => {
+  const { products: communityProducts } = useCommunityProducts();
   return (
     <div className="min-h-screen bg-background">
       {/* Navigation */}
@@ -23,6 +25,15 @@ const Index = () => {
       
       {/* Product Carousels */}
       <div className="space-y-8">
+        {/* Community New */}
+        {communityProducts.length > 0 && (
+          <ProductCarousel
+            title="🆕 Fresh from Artisans"
+            subtitle="Newly posted crafts from our community"
+            products={communityProducts}
+          />
+        )}
+        
         {/* Trending Now */}
         <ProductCarousel
           title="🔥 Trending Now"

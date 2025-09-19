@@ -19,8 +19,6 @@ export const SearchBar = ({ onClose, autoFocus = false }: SearchBarProps) => {
       const searchQuery = encodeURIComponent(query.trim());
       navigate(`/search?q=${searchQuery}`);
       onClose?.();
-      // Force page reload to ensure search works
-      window.location.href = `/search?q=${searchQuery}`;
     }
   };
 
@@ -72,7 +70,12 @@ export const SearchBar = ({ onClose, autoFocus = false }: SearchBarProps) => {
             {popularSearches.map((term) => (
               <button
                 key={term}
-                onClick={() => setQuery(term)}
+                onClick={() => {
+                  const searchQuery = encodeURIComponent(term);
+                  setQuery(term);
+                  navigate(`/search?q=${searchQuery}`);
+                  onClose?.();
+                }}
                 className="text-sm text-accent hover:text-white transition-colors bg-accent/10 hover:bg-accent/20 px-3 py-1 rounded-full border border-accent/20"
               >
                 {term}
