@@ -153,14 +153,38 @@ export default function Sell() {
       <div className="container mx-auto px-4 pt-24 pb-12 max-w-3xl">
         <Card>
           <CardHeader>
-            <CardTitle className="text-white">Post Your Craft</CardTitle>
+            <CardTitle className="text-white flex items-center gap-2">
+              {user ? `Welcome back, ${user.full_name}!` : "Post Your Craft"}
+            </CardTitle>
+            {user && (
+              <p className="text-gray-400">
+                Share your latest creation with the community
+              </p>
+            )}
           </CardHeader>
           <CardContent>
             {!user && (
               <div className="mb-6 p-4 bg-orange-500/10 border border-orange-500/20 rounded-lg">
-                <p className="text-sm text-orange-200">
-                  Please <a href="/auth/signin?type=artisan" className="underline">sign in</a> as an artisan to post your crafts.
+                <p className="text-sm text-orange-200 mb-3">
+                  Please <a href="/auth/signin?type=artisan" className="underline font-medium">sign in</a> as an artisan to post your crafts.
                 </p>
+                <div className="flex gap-2">
+                  <Button 
+                    size="sm" 
+                    variant="outline" 
+                    onClick={() => navigate("/auth/signin?type=artisan")}
+                    className="border-orange-500/50 text-orange-300 hover:bg-orange-500/10"
+                  >
+                    Sign In
+                  </Button>
+                  <Button 
+                    size="sm" 
+                    variant="cinematic"
+                    onClick={() => navigate("/auth/signup?type=artisan")}
+                  >
+                    Create Artisan Account
+                  </Button>
+                </div>
               </div>
             )}
             <form onSubmit={onSubmit} className="space-y-6">
