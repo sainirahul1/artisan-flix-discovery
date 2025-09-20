@@ -2,6 +2,7 @@ import { Navigation } from "@/components/Navigation";
 import { HeroSlider } from "@/components/HeroSlider";
 import { CategoryGrid } from "@/components/CategoryGrid";
 import { ProductCarousel } from "@/components/ProductCarousel";
+import { BecomePartSection } from "@/components/BecomePartSection";
 import { 
   trendingProducts, 
   nearYouProducts, 
@@ -51,18 +52,21 @@ const Index = () => {
         
         {/* Because You Liked */}
         <ProductCarousel
-          title="🎯 Because You Liked Pottery"
-          subtitle="More beautiful ceramics just for you"
+          title="🎯 Top Pottery Collection"
+          subtitle="Exquisite ceramics and beautiful pottery pieces"
           products={becauseYouLikedProducts}
         />
         
         {/* Eco-Friendly */}
         <ProductCarousel
-          title="🌱 Eco-Friendly Picks"
-          subtitle="Sustainable craftsmanship"
+          title="🌱 Premium Textiles"
+          subtitle="Luxury jewelry and handwoven fabrics"
           products={ecoFriendlyProducts}
         />
       </div>
+
+      {/* Become Part Section */}
+      <BecomePartSection />
       
       {/* Footer Spacer */}
       <div className="h-32" />

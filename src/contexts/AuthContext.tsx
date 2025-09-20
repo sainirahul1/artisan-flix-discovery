@@ -1,7 +1,18 @@
 import React, { createContext, useContext, useEffect, useState, ReactNode } from 'react';
 import { Session, User as SupabaseUser } from '@supabase/supabase-js';
-import { supabase, User } from '@/lib/supabase';
+import { supabase } from '@/integrations/supabase/client';
 import { toast } from '@/hooks/use-toast';
+
+export interface User {
+  id: string;
+  email: string;
+  user_type: 'customer' | 'artisan';
+  full_name: string;
+  phone?: string;
+  address?: string;
+  created_at: string;
+  updated_at: string;
+}
 
 interface AuthContextType {
   session: Session | null;
@@ -56,7 +67,7 @@ export const AuthProvider: React.FC<{ children: ReactNode }> = ({ children }) =>
         .single();
 
       if (error) throw error;
-      setUser(data);
+      setUser(data as User);
     } catch (error) {
       console.error('Error fetching user profile:', error);
     } finally {
@@ -67,9 +78,14 @@ export const AuthProvider: React.FC<{ children: ReactNode }> = ({ children }) =>
   const signUp = async (email: string, password: string, userData: Partial<User>) => {
     setLoading(true);
     try {
+      const redirectUrl = `${window.location.origin}/`;
+      
       const { data, error } = await supabase.auth.signUp({
         email,
         password,
+        options: {
+          emailRedirectTo: redirectUrl
+        }
       });
 
       if (error) throw error;
@@ -80,8 +96,11 @@ export const AuthProvider: React.FC<{ children: ReactNode }> = ({ children }) =>
           .from('users')
           .insert({
             id: data.user.id,
-            email: data.user.email,
-            ...userData,
+            email: data.user.email || '',
+            full_name: userData.full_name || '',
+            user_type: userData.user_type || 'customer',
+            phone: userData.phone,
+            address: userData.address,
           });
 
         if (profileError) throw profileError;

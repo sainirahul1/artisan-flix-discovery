@@ -5,8 +5,7 @@ import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import { CartProvider } from "@/contexts/CartContext";
 import { WishlistProvider } from "@/contexts/WishlistContext";
-// Temporarily commented out until Supabase is connected
-// import { AuthProvider } from "@/contexts/AuthContext";
+import { AuthProvider } from "@/contexts/AuthContext";
 import Index from "./pages/Index";
 import Category from "./pages/Category";
 import ProductDetail from "./pages/ProductDetail";
@@ -22,7 +21,7 @@ const queryClient = new QueryClient();
 
 const App = () => (
   <QueryClientProvider client={queryClient}>
-    {/* <AuthProvider> Temporarily disabled until Supabase is connected */}
+    <AuthProvider>
       <CartProvider>
         <WishlistProvider>
           <TooltipProvider>
@@ -46,7 +45,7 @@ const App = () => (
           </TooltipProvider>
         </WishlistProvider>
       </CartProvider>
-    {/* </AuthProvider> */}
+    </AuthProvider>
   </QueryClientProvider>
 );
 
