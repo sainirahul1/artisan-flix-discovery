@@ -43,7 +43,7 @@ export const ProductCard = ({
 
   return (
     <div
-      className="product-card relative w-80 h-[480px] rounded-2xl overflow-hidden cursor-pointer group bg-card scale-on-hover fade-in-up"
+      className="product-card relative w-full max-w-sm h-[400px] sm:h-[480px] rounded-2xl overflow-hidden cursor-pointer group bg-card scale-on-hover fade-in-up mx-auto"
       onMouseEnter={() => setIsHovered(true)}
       onMouseLeave={() => setIsHovered(false)}
       onClick={() => navigate(`/product/${id}`)}
@@ -99,7 +99,7 @@ export const ProductCard = ({
 
         {/* Product Info Overlay */}
         <div
-          className={`product-overlay absolute inset-0 flex flex-col justify-end p-8 transition-all duration-300 ${
+          className={`product-overlay absolute inset-0 flex flex-col justify-end p-4 sm:p-6 lg:p-8 transition-all duration-300 ${
             isHovered ? "opacity-100" : "opacity-0 md:opacity-100"
           }`}
         >
@@ -135,14 +135,14 @@ export const ProductCard = ({
 
           {/* Action Buttons */}
             <div
-              className={`flex gap-3 transition-all duration-300 ${
+              className={`flex flex-col sm:flex-row gap-2 transition-all duration-300 ${
                 isHovered ? "translate-y-0 opacity-100" : "translate-y-4 opacity-0 md:translate-y-0 md:opacity-100"
               }`}
             >
               <Button 
                 variant="hero" 
-                size="xl"
-                className="flex-1 h-12 text-base font-bold shadow-glow-red"
+                size="sm"
+                className="h-9 text-sm font-semibold shadow-glow-red"
                 onClick={(e) => {
                   e.stopPropagation();
                   addItem({ id, name, price, image, artisan });
@@ -153,19 +153,19 @@ export const ProductCard = ({
                   });
                 }}
               >
-                <ShoppingCart className="h-5 w-5" />
+                <ShoppingCart className="h-4 w-4" />
                 Add to Cart
               </Button>
               <Button 
                 variant="cinematic" 
-                size="xl"
-                className="flex-1 h-12 font-semibold"
+                size="sm"
+                className="h-9 text-sm font-medium"
                 onClick={(e) => {
                   e.stopPropagation();
                   navigate(`/product/${id}`);
                 }}
               >
-                View Details
+                View
               </Button>
             </div>
         </div>
