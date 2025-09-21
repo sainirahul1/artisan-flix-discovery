@@ -6,6 +6,7 @@ import { PaymentModal } from "@/components/PaymentModal";
 import { Minus, Plus, Trash2, ShoppingBag } from "lucide-react";
 import { useNavigate } from "react-router-dom";
 import { useToast } from "@/hooks/use-toast";
+import { formatIndianCurrency } from "@/lib/currency";
 
 const Cart = () => {
   const { state, updateQuantity, removeItem, clearCart } = useCart();
@@ -77,7 +78,7 @@ const Cart = () => {
                       </h3>
                       <p className="text-gray-400 text-sm mb-2">by {item.artisan}</p>
                       <p className="text-accent text-lg font-bold">
-                        ₹{item.price.toLocaleString()}
+                        ₹{formatIndianCurrency(item.price)}
                       </p>
                     </div>
 
@@ -124,7 +125,7 @@ const Cart = () => {
               <div className="space-y-3 mb-6">
                 <div className="flex justify-between text-gray-300">
                   <span>Items ({state.totalItems})</span>
-                  <span>₹{state.totalPrice.toLocaleString()}</span>
+                  <span>₹{formatIndianCurrency(state.totalPrice)}</span>
                 </div>
                 <div className="flex justify-between text-gray-300">
                   <span>Shipping</span>
@@ -133,7 +134,7 @@ const Cart = () => {
                 <div className="border-t border-gray-600 pt-3">
                   <div className="flex justify-between text-white text-lg font-bold">
                     <span>Total</span>
-                    <span>₹{state.totalPrice.toLocaleString()}</span>
+                    <span>₹{formatIndianCurrency(state.totalPrice)}</span>
                   </div>
                 </div>
               </div>

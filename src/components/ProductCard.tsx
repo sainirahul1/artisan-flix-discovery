@@ -6,6 +6,7 @@ import { useNavigate } from "react-router-dom";
 import { useCart } from "@/contexts/CartContext";
 import { useWishlist } from "@/contexts/WishlistContext";
 import { toast } from "@/hooks/use-toast";
+import { formatIndianCurrency } from "@/lib/currency";
 
 interface ProductCardProps {
   id: string;
@@ -125,24 +126,24 @@ export const ProductCard = ({
           
           {/* Price */}
           <div className="flex items-center gap-3 mb-4">
-            <span className="text-white text-xl font-bold">₹{price.toLocaleString()}</span>
+            <span className="text-white text-xl font-bold">₹{formatIndianCurrency(price)}</span>
             {originalPrice && (
               <span className="text-gray-400 text-sm line-through">
-                ₹{originalPrice.toLocaleString()}
+                ₹{formatIndianCurrency(originalPrice)}
               </span>
             )}
           </div>
 
           {/* Action Buttons */}
             <div
-              className={`flex flex-col sm:flex-row gap-2 transition-all duration-300 ${
+              className={`flex gap-2 transition-all duration-300 ${
                 isHovered ? "translate-y-0 opacity-100" : "translate-y-4 opacity-0 md:translate-y-0 md:opacity-100"
               }`}
             >
               <Button 
                 variant="hero" 
                 size="sm"
-                className="h-9 text-sm font-semibold shadow-glow-red"
+                className="flex-1 h-9 text-sm font-semibold shadow-glow-red"
                 onClick={(e) => {
                   e.stopPropagation();
                   addItem({ id, name, price, image, artisan });
@@ -159,7 +160,7 @@ export const ProductCard = ({
               <Button 
                 variant="cinematic" 
                 size="sm"
-                className="h-9 text-sm font-medium"
+                className="flex-1 h-9 text-sm font-medium"
                 onClick={(e) => {
                   e.stopPropagation();
                   navigate(`/product/${id}`);

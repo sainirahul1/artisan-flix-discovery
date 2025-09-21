@@ -7,6 +7,7 @@ import { RadioGroup, RadioGroupItem } from "@/components/ui/radio-group";
 import { CreditCard, Wallet, DollarSign, CheckCircle } from "lucide-react";
 import { useToast } from "@/hooks/use-toast";
 import { LoadingSpinner } from "./LoadingSpinner";
+import { formatIndianCurrency } from "@/lib/currency";
 
 interface PaymentModalProps {
   isOpen: boolean;
@@ -32,7 +33,7 @@ export const PaymentModal = ({ isOpen, onClose, total, onSuccess }: PaymentModal
     
     toast({
       title: "Payment Successful!",
-      description: `₹${(total / 100).toFixed(2)} paid successfully via ${paymentMethod === 'cash' ? 'Cash on Delivery' : paymentMethod === 'wallet' ? 'Digital Wallet' : 'Mock Card'}`,
+      description: `₹${formatIndianCurrency(total)} paid successfully via ${paymentMethod === 'cash' ? 'Cash on Delivery' : paymentMethod === 'wallet' ? 'Digital Wallet' : 'Mock Card'}`,
     });
     
     setTimeout(() => {
@@ -67,7 +68,7 @@ export const PaymentModal = ({ isOpen, onClose, total, onSuccess }: PaymentModal
         
         <div className="space-y-6">
           <div className="text-center">
-            <div className="text-2xl font-bold text-white">₹{(total / 100).toFixed(2)}</div>
+            <div className="text-2xl font-bold text-white">₹{formatIndianCurrency(total)}</div>
             <div className="text-sm text-gray-400">Total Amount</div>
           </div>
 
@@ -137,7 +138,7 @@ export const PaymentModal = ({ isOpen, onClose, total, onSuccess }: PaymentModal
                 Processing...
               </>
             ) : (
-              `Pay ₹${(total / 100).toFixed(2)}`
+              `Pay ₹${formatIndianCurrency(total)}`
             )}
           </Button>
         </div>
