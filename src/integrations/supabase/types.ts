@@ -17,6 +17,7 @@ export type Database = {
       products: {
         Row: {
           artisan_id: string
+          artisan_name: string | null
           category: string | null
           created_at: string
           description: string | null
@@ -32,6 +33,7 @@ export type Database = {
         }
         Insert: {
           artisan_id: string
+          artisan_name?: string | null
           category?: string | null
           created_at?: string
           description?: string | null
@@ -47,6 +49,7 @@ export type Database = {
         }
         Update: {
           artisan_id?: string
+          artisan_name?: string | null
           category?: string | null
           created_at?: string
           description?: string | null

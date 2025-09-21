@@ -10,6 +10,7 @@ import { useAuth } from "@/contexts/AuthContext";
 import { supabase } from "@/integrations/supabase/client";
 import { useNavigate } from "react-router-dom";
 import { toast } from "@/hooks/use-toast";
+import { useCommunityProducts } from "@/hooks/useCommunityProducts";
 
 interface DraftProduct {
   id?: string;
@@ -23,6 +24,7 @@ interface DraftProduct {
 export default function Sell() {
   const { user } = useAuth();
   const navigate = useNavigate();
+  const { refreshProducts } = useCommunityProducts();
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [form, setForm] = useState<DraftProduct>({
     name: "",
@@ -113,6 +115,7 @@ export default function Sell() {
           price: form.price,
           category: form.category,
           artisan_id: user.id,
+          artisan_name: user.full_name,
           is_new: true,
           is_trending: false,
           featured: false,
@@ -134,12 +137,16 @@ export default function Sell() {
 
       if (updateError) throw updateError;
 
+      // Refresh products to show new addition
+      refreshProducts();
+      
       toast({ title: "Craft submitted!", description: "Your item is now live." });
       navigate("/");
     } catch (error: any) {
       console.error("Error submitting product:", error);
       // Fallback to localStorage
       const product = saveToLocal(form);
+      refreshProducts();
       toast({ title: "Craft saved locally", description: "We couldn't reach the database. Showing it on the homepage." });
       navigate("/");
     } finally {

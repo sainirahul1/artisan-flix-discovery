@@ -1,3 +1,4 @@
+import { useEffect } from "react";
 import { Navigation } from "@/components/Navigation";
 import { HeroSlider } from "@/components/HeroSlider";
 import { CategoryGrid } from "@/components/CategoryGrid";
@@ -12,7 +13,13 @@ import {
 import { useCommunityProducts } from "@/hooks/useCommunityProducts";
 
 const Index = () => {
-  const { products: communityProducts } = useCommunityProducts();
+  const { products: communityProducts, refreshProducts } = useCommunityProducts();
+
+  // Auto-refresh products periodically  
+  useEffect(() => {
+    const interval = setInterval(refreshProducts, 30000); // refresh every 30 seconds
+    return () => clearInterval(interval);
+  }, [refreshProducts]);
   return (
     <div className="min-h-screen bg-background">
       {/* Navigation */}
